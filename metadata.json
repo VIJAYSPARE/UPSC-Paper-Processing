@@ -1,0 +1,5 @@
+{
+  "name": "UPSC Paper Processor",
+  "description": "An application to process UPSC General Studies papers by translating Hindi content to Marathi while preserving the original English text and formatting, and exporting the result as a .docx file.",
+  "requestFramePermissions": []
+}
