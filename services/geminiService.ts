@@ -2,15 +2,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { fileToGenerativePart } from '../utils/fileUtils';
 
-// Fix: Per coding guidelines, the API key must be obtained from process.env.API_KEY.
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  // This will be caught by the UI and shown to the user.
-  throw new Error("API key is not configured.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const processDocument = async (file: File): Promise<string> => {
   const imagePart = await fileToGenerativePart(file);

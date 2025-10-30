@@ -26,6 +26,11 @@ const App: React.FC = () => {
       return;
     }
 
+    if (!process.env.API_KEY) {
+      setError('API Key is not configured. Please ensure your environment is set up correctly.');
+      return;
+    }
+
     setIsLoading(true);
     setError('');
     setProcessedContent('');
@@ -35,11 +40,21 @@ const App: React.FC = () => {
       setProcessedContent(result);
     } catch (err) {
       console.error(err);
+      let errorMessage = 'An unexpected error occurred. Please check the console for details.';
       if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred while processing the document. Please check the console for details.');
+        if (err.message.includes('API key not valid')) {
+          errorMessage = 'The provided API Key is not valid. Please check your configuration.';
+        } else if (err.message.toLowerCase().includes('billing')) {
+          errorMessage = 'There may be an issue with your billing account. Please check your Google Cloud project settings.';
+        } else if (err.message.includes('400')) {
+          errorMessage = 'The request was invalid. This might be due to an unsupported file format or a problem with the input.';
+        } else if (err.message.includes('500')) {
+          errorMessage = 'The processing service encountered an error. Please try again later.';
+        } else {
+          errorMessage = 'An error occurred while processing the document. Please try again.';
+        }
       }
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
