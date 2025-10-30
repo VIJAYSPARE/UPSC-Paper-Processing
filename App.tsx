@@ -27,7 +27,7 @@ const App: React.FC = () => {
     }
 
     if (!process.env.API_KEY) {
-      setError('API Key is not configured. Please ensure your environment is set up correctly.');
+      setError('API Key is missing. Please ensure it is configured in your environment.');
       return;
     }
 
@@ -43,7 +43,7 @@ const App: React.FC = () => {
       let errorMessage = 'An unexpected error occurred. Please check the console for details.';
       if (err instanceof Error) {
         if (err.message.includes('API key not valid')) {
-          errorMessage = 'The provided API Key is not valid. Please check your configuration.';
+          errorMessage = 'The API Key is invalid. Please verify your key and try again.';
         } else if (err.message.toLowerCase().includes('billing')) {
           errorMessage = 'There may be an issue with your billing account. Please check your Google Cloud project settings.';
         } else if (err.message.includes('400')) {
