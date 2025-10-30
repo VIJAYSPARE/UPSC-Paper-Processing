@@ -35,7 +35,11 @@ const App: React.FC = () => {
       setProcessedContent(result);
     } catch (err) {
       console.error(err);
-      setError('An error occurred while processing the document. Please check the console for details.');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred while processing the document. Please check the console for details.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -68,6 +72,7 @@ const App: React.FC = () => {
           {!processedContent && !isLoading && (
              <div className="flex flex-col items-center gap-6">
               <FileUpload onFileSelect={handleFileSelect} fileName={fileName} />
+              {error && <p className="text-red-500 text-center font-medium -mt-2">{error}</p>}
               <button
                 onClick={handleProcessClick}
                 disabled={!file || isLoading}
@@ -80,8 +85,6 @@ const App: React.FC = () => {
 
           {isLoading && <Loader />}
           
-          {error && <p className="text-red-500 text-center font-medium mt-4">{error}</p>}
-
           {processedContent && (
             <ResultDisplay content={processedContent} fileName={fileName} onReset={resetState} />
           )}
