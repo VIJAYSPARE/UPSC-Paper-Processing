@@ -1,5 +1,5 @@
 {
-  "name": "upsc-paper-processor",
+  "name": "upsc-paper-processor-&-book-creator",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,7 +12,9 @@
     "react": "^19.2.0",
     "@google/genai": "^1.27.0",
     "react-dom": "^19.2.0",
-    "docx": "^9.5.1"
+    "docx": "^9.5.1",
+    "mammoth": "^1.7.2",
+    "jspdf": "^2.5.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

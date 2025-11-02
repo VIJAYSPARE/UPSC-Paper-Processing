@@ -1,5 +1,5 @@
 {
-  "name": "UPSC Paper Processor",
-  "description": "An application to process UPSC General Studies papers by translating Hindi content to Marathi while preserving the original English text and formatting, and exporting the result as a .docx file.",
+  "name": "UPSC Paper Processor & Book Creator",
+  "description": "An application for Vijayshree Publication. Process single UPSC papers (Hindi to Marathi) or compile multiple papers into a complete, bilingual book with export to .docx and .pdf formats.",
   "requestFramePermissions": []
 }
